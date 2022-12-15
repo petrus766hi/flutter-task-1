@@ -9,6 +9,42 @@ class BmiDataResult extends StatelessWidget {
 
   final double bmi;
 
+  String valueCategory(bmiValue) {
+    String category = '';
+    if (bmiValue < 18.5) {
+      category = 'Underweight';
+    } else if (bmiValue >= 18.5 && bmi <= 24.9) {
+      category = 'Normal';
+    } else if (bmiValue >= 25 && bmi <= 29.9) {
+      category = 'Overweight';
+    } else if (bmiValue >= 30) {
+      category = 'Obese';
+    }
+    return category;
+  }
+
+  determineBmiCategory(double bmiValue) {
+    String category = '';
+    if (bmiValue < 16.0) {
+      category = underweightServere;
+    } else if (bmiValue >= 16.0 && bmiValue < 17.0) {
+      category = underweightModerate;
+    } else if (bmiValue >= 17.0 && bmiValue < 18.5) {
+      category = underweightMild;
+    } else if (bmiValue >= 18.5 && bmiValue < 25.0) {
+      category = normal;
+    } else if (bmiValue >= 25.0 && bmiValue < 30.0) {
+      category = overweight;
+    } else if (bmiValue >= 30.0 && bmiValue < 35.0) {
+      category = obeseClassI;
+    } else if (bmiValue >= 35.0 && bmiValue < 40.0) {
+      category = obeseClassII;
+    } else if (bmiValue >= 40.0) {
+      category = obeseClassIII;
+    }
+    return category;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +75,7 @@ class BmiDataResult extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Normal',
+                      valueCategory(bmi),
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -71,7 +107,7 @@ class BmiDataResult extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'You have a normal body weight. Good job!',
+                      determineBmiCategory(bmi),
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
